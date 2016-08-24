@@ -15,12 +15,13 @@ if [ ! -z "${VCAP_SERVICES-}" ]; then
     SETUP_NEW_RELIC=$BUILD_DIR/.profile.d/new-relic-setup.sh
 
     if [ -z "${NEW_RELIC_LICENSE_KEY-}" ]; then
+      echo "Setting NEW_RELIC_LICENSE_KEY via New Relic service binding"
       echo "export NEW_RELIC_LICENSE_KEY=$VCAP_SERVICES_NEW_RELIC_LICENSE_KEY" >> $SETUP_NEW_RELIC
     fi
     if [ -z "${NEW_RELIC_APP_NAME-}" ]; then
-      printf "export NEW_RELIC_APP_NAME=$VCAP_APPLICATION_NAME" >> $SETUP_NEW_RELIC
-      printf "_" >> $SETUP_NEW_RELIC
-      echo $VCAP_APPLICATION_GUID >> $SETUP_NEW_RELIC
+      NEW_RELIC_APP_NAME=$VCAP_APPLICATION_NAME"_"$VCAP_APPLICATION_GUID
+      echo "Setting NEW_RELIC_APP_NAME via to $NEW_RELIC_APP_NAME"
+      echo "export NEW_RELIC_APP_NAME=$NEW_RELIC_APP_NAME" >> $SETUP_NEW_RELIC
     fi
   fi
 fi

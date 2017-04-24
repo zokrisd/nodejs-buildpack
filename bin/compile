@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir> <env-dir>
 
-echo "Starting customized gz nodejs"
 
 set -e
 set -o pipefail   # dont ignore exit codes when piping output
@@ -51,6 +50,8 @@ source $BP_DIR/lib/binaries.sh
 source $BP_DIR/lib/cache.sh
 source $BP_DIR/lib/dependencies.sh
 source $BP_DIR/lib/vendor/new_relic/install.sh $BUILD_DIR
+
+header "Starting customized gz nodejs"
 
 ### Handle errors
 
@@ -193,7 +194,7 @@ summarize_build() {
   fi
 }
 
-header "Build succeeded!"
+header "Build succeeded! (GZ)"
 $BP_DIR/compile-extensions/bin/store_buildpack_metadata $BP_DIR $CACHE_DIR
 summarize_build | output "$LOG_FILE"
 

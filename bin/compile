@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir> <env-dir>
 
+echo "Starting customized gz nodejs"
+
 set -e
 set -o pipefail   # dont ignore exit codes when piping output
 set -o nounset    # fail on unset variables
